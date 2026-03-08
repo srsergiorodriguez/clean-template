@@ -1,3 +1,35 @@
+# --- Publii Internal Files ---
+# Local caches and temporary files that shouldn't be shared
+/preview/
+/backups/
+/logs/
+*.tmp
+*.log
+
+# --- Publii Output Folder ---
+# The Output is pushed to 'gh-pages' branch automatically.
+/output/
+/preview/
+
+# --- OS & System Noise ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Svelte / Node.js ---
+node_modules/
+.svelte-kit/
+/dist/
+.env
+.env.*
+!.env.example
+
+# --- DH Assets Safety ---
+# If you plan to host huge high-res TIFFs locally that shouldn't 
+# be on GitHub, uncomment the line below:
+# *.tif
+
 # Logs
 logs
 *.log
