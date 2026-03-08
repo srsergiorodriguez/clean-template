@@ -1,0 +1,17 @@
+{{! Front page }}
+{{> head}}
+{{> navbar}}
+<main>
+    <sl-button>Button</sl-button>
+    {{! loop that generates a list of posts }}
+    {{#each posts}}
+        {{> postPreview}}
+    {{/each}}
+    {{! /loop that generates list of posts }}
+</main>
+<aside>
+    {{> sidebar}}
+</aside>
+
+{{> pagination}}
+{{> footer}}

@@ -1,0 +1,33 @@
+{
+    "config": {
+        "postsPerPage": 12,
+        "tagsPostsPerPage": 12,
+        "authorsPostsPerPage": 12,
+        "excerptLength": 25,
+        "logo": ""
+    },
+    "customConfig": {
+        "themeMode": "dark",
+        "faviconUpload": "",
+        "faviconExtension": "image/x-icon",
+        "mainWidth": "860px",
+        "sidebarWidth": "300px",
+        "selectedPosts": "",
+        "amountSelectedtPosts": "3",
+        "fontSize": "1"
+    },
+    "postConfig": {
+        "displayAuthorBio": 1
+    },
+    "pageConfig": {},
+    "tagConfig": {
+        "displayPostCounter": 1
+    },
+    "authorConfig": {
+        "displayPostCounter": 1
+    },
+    "defaultTemplates": {
+        "post": "",
+        "page": ""
+    }
+}

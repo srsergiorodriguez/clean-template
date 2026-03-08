@@ -1,0 +1,7 @@
+{
+  "name": "textHero",
+  "label": "Text",
+  "group": "Layout",
+  "value": "<h1>Discover My Blogging Journey: Adventures, Travels, and Hobbies!</h1> <p>Join me as I share captivating stories, travel experiences, and dive into the joys of my favorite hobbies.</p><p><a href=\"#\" class=\"btn\">Read more</a></p>",
+  "type": "wysiwyg"
+},

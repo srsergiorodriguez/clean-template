@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: file:////Users/sergiorodriguez/Documents/Publii/sites/clean-template/preview/sitemap.xml
