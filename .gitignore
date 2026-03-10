@@ -13,6 +13,8 @@
 
 # --- OS & System Noise ---
 .DS_Store
+.DS_Store?
+**/.DS_Store
 Thumbs.db
 .vscode/
 .idea/
