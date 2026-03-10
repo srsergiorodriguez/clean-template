@@ -62,6 +62,18 @@
                 "cssClass": "",
                 "isHidden": false,
                 "items": []
+            },
+            {
+                "id": 1773156950385,
+                "label": "Tags",
+                "title": "",
+                "type": "tags",
+                "target": "_self",
+                "rel": "",
+                "link": "empty",
+                "cssClass": "",
+                "isHidden": false,
+                "items": []
             }
         ],
         "maxLevels": "-1"

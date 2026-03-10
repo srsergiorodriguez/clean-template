@@ -7,11 +7,12 @@
     {{#each posts}}
         {{> postPreview}}
     {{/each}}
-    {{! /loop that generates list of posts }} 
+    {{! /loop that generates list of posts }}
+
+    {{> pagination}}
 </main>
 <aside>
     {{> sidebar}}
 </aside>
 
-{{> pagination}}
 {{> footer}}

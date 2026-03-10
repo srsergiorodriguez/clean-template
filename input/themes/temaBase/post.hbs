@@ -22,33 +22,40 @@
             </h1>
             {{! /post title }}
 
+            <div class="author-info">
+               {{! post author }}
+               {{ translate 'post.publishedBy' }}
+               {{#author}}
+                  <a href="{{url}}" rel="author" title="{{name}}">{{name}}</a>
+               {{/author}}
+               {{! /post author }}
+            </div>
+
+            <div class="main-tag">
+               {{! main tag - if not selected, the first tag in the list of all tags will be displayed }}
+               {{#if mainTag}}
+                  <a href="{{ mainTag.url }}" class="post__maintag">
+                     {{mainTag.name}}
+                  </a>
+               {{/if}}
+               {{! /main tag }}
+            </div>
+
             {{! post creation date }}
-            <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
-               {{date createdAt}}
+            {{!-- <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}"> --}}
+            <time datetime="{{date createdAt 'YYYY'}}">
+               {{date createdAt "YYYY/MM/DD"}}
             </time>
             {{! /post creation date }}
 
-            {{! post author }}
-            {{ translate 'post.publishedBy' }}
-            {{#author}}
-               <a href="{{url}}" rel="author" title="{{name}}">{{name}}</a>
-            {{/author}}
-            {{! /post author }}
-
-            {{! main tag - if not selected, the first tag in the list of all tags will be displayed }}
-            {{#if mainTag}}
-               <a href="{{ mainTag.url }}" class="post__maintag">
-                  {{mainTag.name }}
-               </a>
-            {{/if}}
-            {{! /main tag }}
-
             {{! post modification date }}
             {{#if modifiedAt}}
-               {{ translate 'post.lastUpdatedDate' }}
-               <time datetime="{{date modifiedAt 'YYYY-MM-DDTHH:mm'}}">
-                  {{date modifiedAt}}
-               </time>
+               <small>
+                  {{ translate 'post.lastUpdatedDate' }}
+                  <time datetime="{{date modifiedAt 'YYYY-MM-DDTHH:mm'}}">
+                     {{date modifiedAt "YYYY/MM/DD"}}
+                  </time>   
+               </small>
             {{/if}}
             {{! /post modification date }}
 
@@ -90,42 +97,6 @@
          </div>
          {{! /post body }}
 
-         {{! checks if the "displayAuthorBio" post option is enabled - the Post Options are defined in the config.json in the "postConfig" section, and are accessible in the Theme -> Post Options section of Publii and in the post editor itself in the sidebar -> Other Options section }}
-         {{#if @config.post.displayAuthorBio}}
-            {{! author bio section }}
-            {{!-- {{#author}}
-               <div id="author-bio">
-
-                  {{! checks if an author avatar exists }}
-                  {{#if avatar}}
-                     <img
-                        src="{{avatarImage.url}}" 
-                        {{ lazyload "lazy" }} 
-                        alt="{{avatarImage.alt}}" 
-                        height="{{avatarImage.height}}" 
-                        width="{{avatarImage.width}}">
-                  {{/if}}
-                  {{! /checks if an author avatar exists }}
-
-                  {{! displays the author's name with a link to the author's page }}
-                     <h3>
-                        <a href="{{url}}" title="{{name}}">{{name}}</a>
-                     </h3>
-                  {{! /displays the author's name with a link to the author's page }}
-
-
-                  {{! checks if an author description exists }}
-                  {{#if description}}
-                     <div> {{{description}}} </div>
-                  {{/if}}
-                  {{! /checks if an author description exists }}
-
-               </div>
-            {{/author}} --}}
-            {{! /author bio section }}
-         {{/if}}
-         {{! /check if the "displayAuthorBio" Post option is enabled  }}
-
          {{! previous & next post }}
          {{! checks if there are any posts besides the current one; including ../ segment on a path, we change the post context into the parent context }}
          {{#checkIfAny ../previousPost ../nextPost}}
@@ -147,6 +118,8 @@
          {{/checkIfAny}}
          {{! /checks if there are any posts besides the current one }}
          {{! /previous & next post }}
+
+         <br/>
 
          {{! related posts - defined in config.json file in the "renderer" section }}
          {{! checks if there is any related post; including ../ segment on a path, we change the post context into the parent context }}
@@ -209,8 +182,8 @@
    {{! injects code via a Custom HTML tool }}
 
 </main>
-<aside>
+{{!-- <aside>
    {{> sidebar}}
-</aside>
+</aside> --}}
 
 {{> footer}}

@@ -88,29 +88,16 @@
 
          {{! post creation date }}
          <time datetime="{{date createdAt 'YYYY-MM-DDTHH:mm'}}">
-            {{date createdAt}}
+            {{date createdAt "YYYY/MM/DD"}}
          </time>
          {{! /post creation date }}
 
          {{! post author }}
          {{#author}}
-            <img  
-               src="{{avatarImage.url}}" 
-               {{lazyload "lazy"}} 
-               alt="{{avatarImage.alt}}" 
-               height="{{avatarImage.height}}"  
-               width="{{avatarImage.width}}">
             <a href="{{url}}">{{name}}</a>
          {{/author}}
          {{! /post author }}
-
-         {{! main tag - if not selected, the first tag in the list of all tags
-         will be displayed }}
-         {{#if mainTag}}
-            <a href="{{mainTag.url}}">{{mainTag.name}}</a>
-         {{/if}}
-         {{! /main tag }}
-
+         
          {{! post excerpt - the Custom excerpt is generated when the Read More button is used when editing a post }}
          {{#if hasCustomExcerpt}}
             {{{ excerpt }}}
@@ -122,11 +109,12 @@
       </article>
    {{/each}}
    {{! /loop that generates a list of posts }}
+
+   {{> pagination}}
    
 </main>
 <aside>
    {{> sidebar}} 
 </aside>
 
-{{> pagination}}
 {{> footer}}

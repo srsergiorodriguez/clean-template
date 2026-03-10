@@ -47,19 +47,19 @@
         {
             "name": "postsPerPage",
             "label": "Posts per page",
-            "value": 12,
+            "value": 5,
             "type": "number"
         },
         {
             "name": "tagsPostsPerPage",
             "label": "Tags posts per page",
-            "value": 12,
+            "value": 5,
             "type": "number"
         },
         {
             "name": "authorsPostsPerPage",
             "label": "Authors posts per page",
-            "value": 12,
+            "value": 5,
             "type": "number"
         },
         {
@@ -78,14 +78,71 @@
     ],
     "customConfig": [
         {
-            "name": "themeMode",
-            "label": "Color Theme",
+            "name": "showIntroText",
+            "label": "Show intro text",
+            "group": "General",
+            "value": true,
+            "type": "checkbox"
+        },
+        {
+            "name": "introText",
+            "label": "Intro text",
+            "group": "General",
+            "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempus dolor sed eros vestibulum sollicitudin. Praesent mollis a nulla sed dapibus. Donec placerat ante in venenatis facilisis. Nulla consequat molestie nunc, ut pharetra purus blandit a. Aliquam suscipit egestas nunc, ac tempor purus fermentum a.",
+            "type": "wysiwyg"
+        },
+        {
+            "name": "showPostsListIndex",
+            "label": "Show posts list on index",
+            "group": "General",
+            "value": true,
+            "type": "checkbox"
+        },
+        {
+            "name": "separator",
+            "type": "separator",
+            "label": "Color",
+            "group": "General",
+            "size": "small"
+        },
+        {
+            "name": "themeColorScheme",
+            "label": "Color Scheme",
             "group": "General",
             "value": "dark",
             "type": "select",
             "options": [
-            {"label": "Dark", "value": "dark"},
-            {"label": "Light", "value": "light"}
+                {"label": "Dark", "value": "dark"},
+                {"label": "Light", "value": "light"}
+            ]
+        },
+        {
+            "name": "themeColorVersion",
+            "label": "Color Version",
+            "group": "General",
+            "value": "blue",
+            "type": "select",
+            "options": [
+                {"label": "Red", "value": ".red."},
+                {"label": "Pink", "value": ".pink."},
+                {"label": "Fuchsia", "value": ".fuchsia."},
+                {"label": "Purple", "value": ".purple."},
+                {"label": "Violet", "value": ".violet."},
+                {"label": "Indigo", "value": ".indigo."},
+                {"label": "Blue", "value": ".blue."},
+                {"label": "Azure", "value": "."},
+                {"label": "Cyan", "value": ".cyan."},
+                {"label": "Jade", "value": ".jade."},
+                {"label": "Green", "value": ".green."},
+                {"label": "Lime", "value": ".lime."},
+                {"label": "Yellow", "value": ".yellow."},
+                {"label": "Amber", "value": ".amber."},
+                {"label": "Pumpkin", "value": ".pumpkin."},
+                {"label": "Orange", "value": ".orange."},
+                {"label": "Sand", "value": ".sand."},
+                {"label": "Grey", "value": ".grey."},
+                {"label": "Zinc", "value": ".zinc."},
+                {"label": "Slate", "value": ".slate."}
             ]
         },
         {
@@ -120,6 +177,20 @@
                     "value": "image/png"
                 }
             ]
+        },
+        {
+            "name": "rowSectionBorder",
+            "label": "Show Row Sections border",
+            "group": "Layout",
+            "value": true,
+            "type": "checkbox"
+        },
+        {
+            "name": "separator",
+            "type": "separator",
+            "label": "Column sections",
+            "group": "Layout",
+            "size": "small"
         },
         {
             "name": "mainWidth",
@@ -161,12 +232,50 @@
             "name": "fontSize",
             "label": "Font size",
             "group": "Fonts",
-            "note": "The font-size of the root element in REM unit",
-            "value": "1",
+            "note": "The font-size of the text paragraphs",
+            "value": "16",
             "type": "range",
-            "min": 1,
-            "max": 3,
-            "step": 0.05
+            "min": 12,
+            "max": 20,
+            "step": 1
+        },
+        {
+            "label": "Google Fonts Configuration",
+            "group": "Fonts",
+            "type": "separator",
+            "note": "To customize your fonts: <br>1. Go to <a href='https://fonts.google.com' target='_blank'>fonts.google.com</a> and select your styles.<br>2. In the 'Embed Code' section, look for the <code>family=</code> part of the URL.<br>3. Copy the part after the equals sign into the <b>URL Segment</b> field (e.g., <code>Libre+Baskerville:wght@700</code>).<br>4. Enter the simple name in the <b>Family Name</b> field (e.g., <code>Libre Baskerville</code>)."
+        },
+        {
+            "name": "fontHeadingsName",
+            "label": "Headings Font Family Name",
+            "group": "Fonts",
+            "note": "(e.g. 'Libre Baskerville')",
+            "value": "Libre Baskerville",
+            "type": "text"
+        },
+        {
+            "name": "fontHeadingsURL",
+            "label": "Headings Font Google URL Segment",
+            "group": "Fonts",
+            "note": "(e.g. Libre+Baskerville:wght@700)",
+            "value": "Libre+Baskerville:wght@700",
+            "type": "text"
+        },
+        {
+            "name": "fontBodyName",
+            "label": "Body Font Family Name",
+            "group": "Fonts",
+            "note": "(e.g. 'Inter')",
+            "value": "Inter",
+            "type": "text"
+        },
+        {
+            "name": "fontBodyURL",
+            "label": "Body Font Google URL Segment",
+            "group": "Fonts",
+            "note": "(e.g. Inter:wght@400;700)",
+            "value": "Inter:wght@400;700",
+            "type": "text"
         }
     ],
     "authorConfig": [
@@ -187,24 +296,7 @@
             ]
         }
     ],
-    "postConfig": [
-        {
-            "name": "displayAuthorBio",
-            "label": "Display author bio",
-            "value": 1,
-            "type": "select",
-            "options": [
-                {
-                    "label": "Enabled",
-                    "value": 1
-                },
-                {
-                    "label": "Disabled",
-                    "value": 0
-                }
-            ]
-        }
-    ],
+    "postConfig": [],
     "tagConfig": [
         {
             "name": "displayPostCounter",

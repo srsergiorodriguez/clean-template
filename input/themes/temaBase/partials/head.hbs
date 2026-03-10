@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="{{ @website.language }}" data-theme="{{@config.custom.themeMode}}" >
+<html lang="{{ @website.language }}" data-theme="{{@config.custom.themeColorScheme}}" >
    <script>
-      // Sync the attribute with the class Shoelace expects
-      const theme = "{{@config.custom.themeMode}}";
+      // Sync the attribute with the class shoelace expects
+      const theme = "{{@config.custom.themeColorScheme}}";
       if (theme === 'dark') {
          document.documentElement.classList.add('sl-theme-dark');
       } else {
@@ -28,7 +28,7 @@
       {{canonicalLink}}
       {{ampLink}}
       {{feedLink}}
-      {{socialMetaTags}} 
+      {{socialMetaTags}}
 
       {{! check if a favicon exists; faviconUpload is a custom option included in the config.json file}}
       {{#if @config.custom.faviconUpload}}
@@ -46,9 +46,27 @@
          {{/if}}
       {{/if}}  
       {{! /check if pagination exists}}
+
+      {{! import pico css }}
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+      {{#if @config.custom.fontBodyURL}}
+         <link href="https://fonts.googleapis.com/css2?family={{@config.custom.fontBodyURL}}&display=swap" rel="stylesheet">
+      {{/if}}
+
+      {{#if @config.custom.fontHeadingsURL}}
+         {{#checkIf @config.custom.fontBodyURL '!=' @config.custom.fontHeadingsURL}}
+            <link href="https://fonts.googleapis.com/css2?family={{@config.custom.fontHeadingsURL}}&display=swap" rel="stylesheet">
+         {{/checkIf}}
+      {{/if}}
       
-      <link rel="stylesheet" href="{{css "pico.fluid.classless.jade.min.css" }}">
-      {{#checkIf @config.custom.themeMode '==' 'dark'}}
+      {{! import pico css }}
+      {{!-- <link rel="stylesheet" href="{{css "pico.fluid.classless.jade.min.css" }}"> --}}
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.fluid.classless{{@config.custom.themeColorVersion}}min.css">
+
+      {{! import shoelace }}
+      {{#checkIf @config.custom.themeColorScheme '==' 'dark'}}
          <link rel="stylesheet" href="{{css "sl-theme-dark.css"}}" />
       {{else}}
          <link rel="stylesheet" href="{{css "sl-theme-light.css"}}" />
@@ -64,7 +82,9 @@
       {{! /code injection by a Custom HTML tool }}
 
    </head>
-   <body>
+ 
+   {{!-- <body> --}}
+   <body class="{{#unless posts}}no-sidebar{{/unless}} {{#if post}}no-sidebar{{/if}} {{#if page}}no-sidebar{{/if}}">
 
       {{! code injection by a Custom HTML tool }}
       {{{@bodyCustomCode}}}
