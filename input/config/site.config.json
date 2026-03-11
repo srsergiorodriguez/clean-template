@@ -3,12 +3,12 @@
     "name": "clean-template",
     "displayName": "Clean Template",
     "description": "",
-    "synced": false,
+    "synced": "synced",
     "logo": {
         "color": 1,
         "icon": "web-eye"
     },
-    "domain": "",
+    "domain": "https://srsergiorodriguez.github.io/clean-template",
     "language": "es",
     "spellchecking": false,
     "advanced": {
@@ -173,7 +173,7 @@
         }
     },
     "deployment": {
-        "protocol": "",
+        "protocol": "github-pages",
         "relativeUrls": false,
         "port": "",
         "server": "",
@@ -209,10 +209,10 @@
         },
         "github": {
             "server": "api.github.com",
-            "user": "",
-            "repo": "",
-            "branch": "",
-            "token": "",
+            "user": "srsergiorodriguez",
+            "repo": "clean-template",
+            "branch": "gh-pages",
+            "token": "publii-gh-token uuid-1772834885096-664786080",
             "parallelOperations": 1,
             "apiRateLimiting": 1
         },
@@ -237,5 +237,6 @@
             "outputDirectory": ""
         }
     },
-    "theme": "temaBase"
+    "theme": "temaBase",
+    "syncDate": 1773262341996
 }
