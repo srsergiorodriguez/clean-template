@@ -438,5 +438,8 @@
                 }
             }
         }
+    },
+    "pageTemplates": {
+        "print": "Printable Page Template"
     }
 }

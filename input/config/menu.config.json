@@ -28,18 +28,6 @@
                 "items": []
             },
             {
-                "id": 1772893645244,
-                "label": "|",
-                "title": "",
-                "type": "separator",
-                "target": "_self",
-                "rel": "",
-                "link": "",
-                "cssClass": "",
-                "isHidden": false,
-                "items": []
-            },
-            {
                 "id": 1772893657511,
                 "label": "Page 2",
                 "title": "",
@@ -71,6 +59,18 @@
                 "target": "_self",
                 "rel": "",
                 "link": "empty",
+                "cssClass": "",
+                "isHidden": false,
+                "items": []
+            },
+            {
+                "id": 1773195248163,
+                "label": "Page 2 print",
+                "title": "",
+                "type": "page",
+                "target": "_self",
+                "rel": "",
+                "link": 5,
                 "cssClass": "",
                 "isHidden": false,
                 "items": []
