@@ -2,7 +2,7 @@
     "uuid": "uuid-1772834885096-664786080",
     "name": "clean-template",
     "displayName": "Clean Template",
-    "description": "",
+    "description": "TEST TEMPLATE FOR MIRLA",
     "synced": "synced",
     "logo": {
         "color": 1,
@@ -237,6 +237,6 @@
             "outputDirectory": ""
         }
     },
-    "theme": "temaBase",
+    "theme": "mirlaTheme",
     "syncDate": 1773262341996
 }

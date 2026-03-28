@@ -1,0 +1,128 @@
+/* ==========================================
+   Mirla Web Component Editor Placeholders
+   ========================================== */
+
+body#tinymce mirla-preview {
+  display: block !important;
+  min-height: 60px !important;
+  padding: 20px;
+  margin: 1.5em 0;
+  background-color: #f4f4f4;
+  border: 2px dashed #a0a0a0;
+  border-radius: 6px;
+  text-align: center;
+  font-family: monospace;
+  color: #555;
+  cursor: pointer;
+}
+
+body#tinymce mirla-preview::before {
+  content: "🖼️ Mirla Preview | PID: " attr(pid);
+  display: block;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+body#tinymce mirla-preview[title]::after {
+  content: "Title: " attr(title);
+  display: block;
+  font-size: 0.9em;
+  color: #888;
+}
+
+body#tinymce mirla-barchart {
+  display: block !important;
+  min-height: 60px !important;
+  padding: 20px;
+  margin: 1.5em 0;
+  background-color: #f4f4f4;
+  border: 2px dashed #4a90e2; /* Blue dashed border for charts */
+  border-radius: 6px;
+  text-align: center;
+  font-family: monospace;
+  color: #555;
+  cursor: pointer;
+}
+
+body#tinymce mirla-barchart::before {
+  content: "📊 Mirla Bar Chart | Key: " attr(key);
+  display: block;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+body#tinymce mirla-tree {
+  display: block !important;
+  min-height: 60px !important;
+  padding: 20px;
+  margin: 1.5em 0;
+  background-color: #f4f4f4;
+  border: 2px dashed #4a90e2;
+  border-radius: 6px;
+  text-align: center;
+  font-family: monospace;
+  color: #555;
+}
+
+body#tinymce mirla-tree::before {
+  content: "🌳 Mirla Tree Graph | Hierarchy: " attr(keys);
+  display: block;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+body#tinymce mirla-timeline {
+  display: block !important;
+  min-height: 60px !important;
+  padding: 20px;
+  margin: 1.5em 0;
+  background-color: #f4f4f4;
+  border: 2px dashed #4a90e2;
+  border-radius: 6px;
+  text-align: center;
+  font-family: monospace;
+  color: #555;
+}
+
+body#tinymce mirla-timeline::before {
+  content: "🕒 Mirla Timeline | Date Key: " attr(dateKey);
+  display: block;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 5px;
+}
+
+body#tinymce mirla-network {
+  display: block !important;
+  min-height: 80px !important;
+  padding: 25px;
+  margin: 1.5em 0;
+  background-color: #f4f4f4;
+  border: 2px dashed #4a90e2; /* Blue dashed border for consistency with other viz */
+  border-radius: 6px;
+  text-align: center;
+  font-family: monospace;
+  color: #555;
+  cursor: pointer;
+}
+
+body#tinymce mirla-network::before {
+  content: "🕸️ Mirla Network Graph";
+  display: block;
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+
+body#tinymce mirla-network::after {
+  content: "Connection: " attr(sourceKey) " ↔ " attr(targetKey);
+  display: block;
+  font-size: 0.9em;
+  color: #777;
+  border-top: 1px solid #ddd;
+  padding-top: 8px;
+  margin-top: 5px;
+}

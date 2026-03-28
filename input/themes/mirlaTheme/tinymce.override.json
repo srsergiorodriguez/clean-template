@@ -1,0 +1,4 @@
+{
+  "extended_valid_elements": ["mirla-preview[*]", "mirla-barchart[*]","mirla-tree[*]","mirla-timeline[*]", "mirla-network[*]"],
+  "custom_elements": ["mirla-preview", "mirla-barchart", "mirla-tree","mirla-timeline",  "mirla-network"]
+}
