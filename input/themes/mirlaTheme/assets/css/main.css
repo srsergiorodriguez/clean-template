@@ -135,7 +135,7 @@ h1, h2, h3, h4, h5, h6,
 
 body {
   margin: 0;
-  padding: 0;
+  padding: 0 var(--pico-spacing);
 
   --sidebar-current-width: var(--sidebar-width);
 
@@ -167,6 +167,7 @@ header {
 
 main {
   grid-area: main;
+  min-width: 0;
 }
 
 aside {
@@ -221,6 +222,12 @@ a:hover {
 }
 
 /* Images and Media */
+
+figure {
+  max-width: 100%;
+  overflow-x: auto; /* Allows scrolling if a table/chart is inside a figure */
+}
+
 img {
   height: auto;
   max-width: 100%;
@@ -376,11 +383,13 @@ hr {
 }
 
 /* Support for wide galleries inside the main column */
-.gallery-wrapper--wide,
-.gallery-wrapper--full {
-  margin-left: -5%;
-  margin-right: -5%;
-  width: 110%;
+@media (min-width: 1024px) {
+  .gallery-wrapper--wide,
+  .gallery-wrapper--full {
+    margin-left: -5%;
+    margin-right: -5%;
+    width: 110%;
+  }
 }
 
 /* Menu logic for nested items */

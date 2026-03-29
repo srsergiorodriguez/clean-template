@@ -122,7 +122,7 @@
         {/if}
         <button class="csv-btn" onclick={downloadMetadata} title={i18n.downloadCSV}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          CSV
+          {i18n.downloadCSV}
         </button>
       </div>
     </div>
@@ -168,34 +168,52 @@
     margin: 2em 0;
     font-family: var(--pico-font-family, inherit);
     color: var(--pico-color, inherit);
+    
+    /* FOOLPROOF BORDER COLOR:
+      Takes the current text color and makes it 20% opaque.
+      Always visible, always contrasts correctly with the background!
+    */
+    --mirla-border: color-mix(in srgb, var(--pico-color, currentColor) 20%, transparent);
   }
 
   .table-title {
     margin-bottom: 1rem;
     font-size: 1.5rem;
+    color: var(--pico-heading-color, inherit);
   }
 
-  /* Microfrontend container replica */
   .controls-container {
     background: var(--pico-card-background-color, #f8f9fa);
     padding: 1.5rem;
-    border-radius: var(--pico-border-radius);
+    border-radius: var(--pico-border-radius, 8px);
     margin-bottom: 2rem;
-    box-shadow: var(--pico-card-box-shadow);
-    border: 1px solid var(--pico-form-element-border-color, rgba(0,0,0,0.1));
+    box-shadow: var(--pico-box-shadow, 0 2px 4px rgba(0,0,0,0.1));
+    border: 1px solid var(--mirla-border);
   }
 
   .search-bar-container {
     display: flex;
     align-items: center;
-    margin-bottom: 0; 
+    margin-bottom: 0;
   }
 
-  /* Forcing the pill-shape to replicate global styles */
   .search-bar {
-    margin-bottom: 0; 
+    width: 100%;
+    margin: 0;
+    padding: 0.6rem 1.2rem;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--pico-color, inherit);
+    background-color: var(--sl-input-background-color, var(--pico-background-color, #fff));
+    border: 1px solid var(--mirla-border);
     border-radius: 50px; 
-    background-color: var(--pico-form-element-background-color);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .search-bar:focus {
+    border-color: var(--pico-primary, #3498db);
+    box-shadow: 0 0 0 calc(var(--pico-outline-width, 3px) / 2) var(--sl-focus-ring-color, rgba(52, 152, 219, 0.2));
   }
 
   .status-bar {
@@ -203,7 +221,7 @@
     justify-content: space-between;
     align-items: center;
     font-size: 0.9rem;
-    border-top: 1px solid var(--pico-form-element-border-color);
+    border-top: 1px solid var(--mirla-border);
     padding-top: 1rem;
     margin-top: 1rem;
   }
@@ -215,46 +233,65 @@
   }
 
   .reset-btn {
-    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.2rem 0.8rem;
     margin: 0;
+    font-family: inherit;
+    font-size: 1.2rem;
     line-height: 1;
+    background-color: transparent;
+    color: var(--pico-color, inherit);
+    border: 1px solid var(--mirla-border);
+    border-radius: 50px; 
     cursor: pointer;
-    border-radius: 50px; /* Matching the pill shape */
-    -webkit-user-select: none;
-    user-select: none;
+    outline: none;
+    transition: border-color 0.2s, color 0.2s;
   }
 
-  /* Forcing the solid Pico primary color so it is never gray */
+  .reset-btn:hover {
+    border-color: var(--pico-primary, #3498db);
+    color: var(--pico-primary, #3498db);
+  }
+
   .csv-btn {
-    margin: 0;
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    padding: 0.35rem 1rem;
-    line-height: 1.2;
-    width: auto;
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border-radius: 50px; 
-    background-color: var(--pico-primary, #0172cb);
+    padding: 0.4rem 1.2rem;
+    margin: 0;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: bold;
+    background-color: var(--pico-primary, #3498db);
     color: var(--pico-primary-inverse, #fff);
-    border: 1px solid var(--pico-primary, #0172cb);
+    border: 1px solid var(--pico-primary, #3498db);
+    border-radius: 50px; 
+    cursor: pointer;
+    outline: none;
     transition: background-color 0.2s, border-color 0.2s;
   }
 
   .csv-btn:hover {
-    background-color: var(--pico-primary-hover, #01589b);
-    border-color: var(--pico-primary-hover, #01589b);
+    background-color: var(--pico-primary-hover, #2980b9);
+    border-color: var(--pico-primary-hover, #2980b9);
   }
 
-  /* Table Grid Styles */
+  .csv-btn:focus, .reset-btn:focus {
+    box-shadow: 0 0 0 calc(var(--pico-outline-width, 3px) / 2) var(--sl-focus-ring-color, rgba(52, 152, 219, 0.2));
+  }
+
+  .csv-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
   .table-container {
     max-height: 500px;
     overflow: auto;
     position: relative;
-    border: 1px solid var(--pico-form-element-border-color, rgba(0,0,0,0.1));
+    border: 1px solid var(--mirla-border);
     border-radius: var(--pico-border-radius, 8px);
     background: var(--pico-card-background-color, transparent);
   }
@@ -273,7 +310,7 @@
     z-index: 2;
     padding: 0.75rem 1rem;
     text-align: left;
-    border-bottom: 2px solid var(--pico-form-element-border-color, rgba(0,0,0,0.1));
+    border-bottom: 2px solid var(--mirla-border);
     white-space: nowrap;
   }
 
@@ -299,7 +336,7 @@
 
   .sort-icon {
     font-size: 0.7em;
-    color: var(--pico-primary, #4a90e2);
+    color: var(--pico-primary, #3498db);
   }
 
   .sort-icon.inactive {
@@ -313,7 +350,7 @@
 
   .mirla-table td {
     padding: 0.75rem 1rem;
-    border-bottom: 1px solid var(--pico-form-element-border-color, rgba(0,0,0,0.05));
+    border-bottom: 1px solid var(--mirla-border);
     vertical-align: top;
   }
 

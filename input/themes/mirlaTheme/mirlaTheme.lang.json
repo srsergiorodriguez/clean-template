@@ -1,18 +1,15 @@
 {
    "partials": {
-           
       "pagination": {
          "prev": "Anterior",
          "next": "Siguiente"
       },
-
       "sidebar": {
          "selectedPosts": "Posts seleccionados",
          "featuredPosts": "Posts recomendados",
          "authors": "Autores"
       }
    },
-
    "post": {
       "publishedBy": "Por ",
       "lastUpdatedDate": "Actualizado en: ",
@@ -20,23 +17,30 @@
       "nextPost": "Siguiente",
       "relatedPosts": "Relacionados: "
    },
-
    "tags": {
       "tagsPageTitle": "Etiquetas",
       "description": "Todas las etiquetas",
       "post": {
-       "1": "Post",
-          "default": "Posts"
+         "1": "Post",
+         "default": "Posts"
       }
-  },
-
-  "author": {
-    "visitWebsite": "Visitar sitio web"
-  },
-
+   },
+   "author": {
+      "visitWebsite": "Visitar sitio web"
+   },
    "error": {
-       "404": "Error 404",
-       "message": "La página que buscas parece haberse movido, fue borrada o no existe. Puedes regresar o ir al inicio.",
-       "button": "Ir al inicio"
+      "404": "Error 404",
+      "message": "La página que buscas parece haberse movido, fue borrada o no existe. Puedes regresar o ir al inicio.",
+      "button": "Ir al inicio"
+   },
+   "mirla": {
+      "searchPlaceholder": "Buscar...",
+      "resultsFound": "resultados encontrados",
+      "loading": "Cargando...",
+      "all": "Todo",
+      "downloadCSV": "Descargar CSV",
+      "clearSearch": "Borrar búsqueda",
+      "noRecordsFound": "No se encontraron resultados",
+      "collectionMetadata": "Metadatos de la colección"
    }
 }

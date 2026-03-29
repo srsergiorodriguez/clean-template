@@ -1,29 +1,24 @@
 <svelte:options customElement="mirla-preview" />
 
 <script>
-  // 1. Define the props that users will pass via HTML attributes
   let { 
     pid = "", 
     title = "", 
     alt = "", 
-    page = "1" // HTML attributes are passed as strings, so we default to "1"
+    page = "1" 
   } = $props();
 
-  // 2. Grab the data from the global payload
   const collectionData = window.MIRLA_COLLECTION_DATA || { items: [] };
   const items = collectionData.items;
   const siteDomain = window.MIRLA_CONTEXT?.siteDomain || "";
 
-  // 3. Derived state to find the item dynamically
   let found = $derived(items.find(d => d.pid === pid));
-  
-  // Calculate the array index for the image (page 1 = index 0)
   let imageIndex = $derived(Math.max(0, Number(page) - 1));
 </script>
 
 {#if found}
   <div class="mirla-preview-item">
-    <a href="{siteDomain}/item/{pid}/index.html">
+    <a href="{siteDomain}/item/{pid}/index.html" class="img-link">
       {#if found.images && found.images[imageIndex]}
         <img 
           src={found.images[imageIndex]} 
@@ -52,63 +47,84 @@
 
 <style>
   .mirla-preview-item {
-    padding: 1.5em;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 8px;
+    padding: 0.5em;
+    /* PicoCSS variable integration */
+    border: 1px solid var(--pico-form-element-border-color, rgba(0,0,0,0.15));
+    border-radius: var(--pico-border-radius, 8px);
+    background: var(--pico-card-background-color, transparent);
+    box-shadow: var(--pico-card-box-shadow, none);
+    color: var(--pico-color, inherit);
+    font-family: var(--pico-font-family, inherit);
+    
     max-width: 400px;
     margin: 1.5em auto;
     text-align: center;
-    background: #ffffff44;
-    font-family: inherit;
+  }
+
+  .img-link {
+    display: block;
+    border-radius: calc(var(--pico-border-radius, 8px) / 2);
+    overflow: hidden;
   }
 
   .mirla-preview-item img {
     width: 100%;
     height: auto;
-    border-radius: 4px;
-    transition: transform 0.2s;
+    /* Added max height and contain to prevent distortion of tall images */
+    max-height: 400px;
+    object-fit: contain; 
+    border-radius: calc(var(--pico-border-radius, 8px) / 2);
+    display: block;
+    
+    /* Matched the transition style from ItemsBar for consistency */
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   .mirla-preview-item img:hover {
-    transform: scale(1.02);
+    transform: scale(1.03);
   }
 
   .silent-link {
     display: block;
     margin-top: 1em;
-    font-weight: bold;
-    color: inherit;
+    font-weight: 600;
+    color: var(--pico-color, inherit);
     text-decoration: none;
+    transition: color 0.2s;
   }
 
   .silent-link:hover {
+    color: var(--pico-primary-hover, inherit);
     text-decoration: underline;
   }
 
   .custom-title {
     margin-top: 0.5em;
+    margin-bottom: 0;
     font-size: 0.9em;
-    color: #666;
+    color: var(--pico-muted-color, #666);
   }
 
   .no-image-placeholder {
     width: 100%;
     aspect-ratio: 1;
-    background: #eee;
+    background: var(--pico-muted-border-color, #eee);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #999;
-    border-radius: 4px;
+    color: var(--pico-muted-color, #999);
+    border-radius: calc(var(--pico-border-radius, 8px) / 2);
   }
 
   .mirla-error {
     padding: 1em;
-    border: 1px solid red;
-    background: #fff0f0;
-    color: red;
+    border: 1px dashed var(--pico-del-color, red);
+    color: var(--pico-del-color, red);
+    background: transparent;
+    font-family: monospace;
     font-weight: bold;
     text-align: center;
     margin: 1em 0;
+    border-radius: var(--pico-border-radius, 8px);
   }
 </style>

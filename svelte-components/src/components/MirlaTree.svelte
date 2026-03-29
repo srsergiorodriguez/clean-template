@@ -5,11 +5,11 @@
   import * as d3 from 'd3';
   import ItemsBar from "$lib/ItemsBar.svelte";
 
-  // 1. Svelte 5 Props
+  // 1. Props (Mapped to PicoCSS variables)
   let { 
     keys = "",     
-    color = "#4a90e2",
-    accent = "#ffcc00"
+    color = "var(--pico-primary, #4a90e2)",
+    accent = "var(--pico-secondary, #ffcc00)"
   } = $props();
 
   // 2. Data Source
@@ -52,7 +52,8 @@
       d3.select(svgElement).selectAll("circle")
         .transition().duration(500)
         .attr("fill", color)
-        .attr("stroke-width", 1);
+        .attr("stroke-width", 1)
+        .attr("r", 6); // Reset radius
     }
   }
 
@@ -87,9 +88,10 @@
 
     const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
+    // Draw Links
     g.append("g")
       .attr("fill", "none")
-      .attr("stroke", "#ccc")
+      .attr("stroke", "var(--pico-muted-color, #888)")
       .attr("stroke-width", 1.5)
       .attr("stroke-linecap", "round")
       .selectAll("path")
@@ -108,25 +110,31 @@
           activeNodeId = d.data.name + d.depth;
           
           // Cohesive visual feedback
-          g.selectAll("circle").attr("fill", color).attr("stroke-width", 1);
+          g.selectAll("circle")
+            .attr("fill", color)
+            .attr("stroke-width", 1)
+            .attr("r", 6);
+
           d3.select(this).select("circle")
             .attr("fill", accent)
-            .attr("stroke-width", 4);
+            .attr("stroke-width", 2)
+            .attr("r", 8); // Enlarge slightly when active
         });
 
     node.append("circle")
       .attr("fill", d => (activeNodeId === (d.data.name + d.depth)) ? accent : color)
-      .attr("stroke", "black")
+      .attr("stroke", "var(--pico-background-color, #fff)") // Cutout aesthetic
       .attr("stroke-width", d => (activeNodeId === (d.data.name + d.depth)) ? 2 : 1)
-      .attr("r", 6);
+      .attr("r", d => (activeNodeId === (d.data.name + d.depth)) ? 8 : 6);
 
     node.append("text")
       .attr("dy", "0.31em")
-      .attr("x", d => d.children ? -10 : 10)
+      .attr("x", d => d.children ? -12 : 12)
       .attr("text-anchor", d => d.children ? "end" : "start")
       .text(d => d.data.name === "Root" ? "" : d.data.name)
+      .attr("fill", "var(--pico-color, currentColor)")
       .attr("paint-order", "stroke")
-      .attr("stroke", "white")
+      .attr("stroke", "var(--pico-background-color, white)") 
       .attr("stroke-width", 4)
       .attr("stroke-opacity", 0.6)
       .attr("stroke-linecap", "round")
@@ -167,6 +175,8 @@
     width: 100%;
     margin: 2em 0;
     overflow: visible; 
+    font-family: var(--pico-font-family, inherit);
+    color: var(--pico-color, inherit);
   }
 
   .svg-wrapper {
@@ -183,15 +193,15 @@
   .error {
     padding: 2rem;
     text-align: center;
-    color: #999;
+    color: var(--pico-muted-color, #999);
     font-family: monospace;
-    border: 1px dashed #ccc;
+    border: 1px dashed var(--pico-muted-border-color, #ccc);
+    border-radius: var(--pico-border-radius, 8px);
   }
 
   :global(mirla-tree svg text) {
-    font-family: inherit;
-    font-size: 11px;
+    font-family: var(--pico-font-family, inherit);
+    font-size: 0.85rem;
     pointer-events: none;
-    fill: currentColor;
   }
 </style>

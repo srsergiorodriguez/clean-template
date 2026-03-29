@@ -5,10 +5,11 @@
   import * as d3 from 'd3';
   import ItemsBar from "$lib/ItemsBar.svelte";
 
+  // 1. Props with PicoCSS defaults
   let { 
     dateKey = "", 
-    color = "#4a90e2", 
-    accent = "#ffcc00"
+    color = "var(--pico-primary, #4a90e2)", 
+    accent = "var(--pico-secondary, #ffcc00)" 
   } = $props();
 
   const collectionData = window.MIRLA_COLLECTION_DATA || { items: [] };
@@ -21,7 +22,6 @@
   let activeDateStr = $state(null);
   let zoomHandler;
 
-  // Robust date parsing for years (e.g., 2006) or ISO strings
   function parseMirlaDate(val) {
     if (!val) return null;
     if ((typeof val === 'number' && val > 1000 && val < 2100) || 
@@ -46,18 +46,15 @@
   function handleReset() {
     selectedItems = [];
     activeDateStr = null;
-
     if (svgElement) {
       const svg = d3.select(svgElement);
-
-      // 1. Reset visual state of all dots
       svg.selectAll("circle")
         .transition()
         .duration(500)
         .attr("stroke-width", 1)
-        .attr("fill", color);
+        .attr("fill", color)
+        .attr("r", 8);
 
-      // 2. Reset zoom transform
       if (zoomHandler) {
         svg.transition()
           .duration(500)
@@ -79,6 +76,7 @@
 
     svg.attr("viewBox", [0, 0, width, height]);
 
+    // Masking Definition to constrain shapes inside the timeline boundaries
     const defs = svg.append("defs");
     defs.append("clipPath")
       .attr("id", "clip-timeline")
@@ -93,6 +91,7 @@
       .range([margin.h, width - margin.h])
       .nice();
 
+    // Stripped D3 formatting and applied exact font sizes
     const xAxis = (g, scale) => g
       .attr("transform", `translate(0, ${height * 0.7})`)
       .call(d3.axisBottom(scale)
@@ -106,7 +105,11 @@
           }
           return formatToYear(d);
         })
-      );
+      )
+      .attr("font-size", null)
+      .attr("font-family", null)
+      .selectAll(".tick text")
+      .attr("font-size", "0.8rem");
 
     const gx = svg.append("g").attr("class", "axis");
     const g = svg.append("g").attr("clip-path", "url(#clip-timeline)");
@@ -118,20 +121,22 @@
         .attr("cy", height * 0.35)
         .attr("r", 8)
         .attr("fill", color)
-        .attr("stroke", "black")
+        .attr("stroke", "var(--pico-background-color, #fff)") // Use background as stroke for a cutout effect
         .attr("stroke-width", 1)
         .attr("cursor", "pointer")
         .on("click", function(event, d) {
           selectedItems = d.items;
           activeDateStr = d.dateStr;
-          // Clear previous highlights
+          
           gDots.selectAll("circle")
             .attr("stroke-width", 1)
-            .attr("fill", color);
-          // Set new highlight
+            .attr("fill", color)
+            .attr("r", 8);
+          
           d3.select(this)
             .attr("stroke-width", 2)
-            .attr("fill", accent);
+            .attr("fill", accent)
+            .attr("r", 10); // Slightly enlarge the active dot
         });
 
     zoomHandler = d3.zoom()
@@ -143,8 +148,6 @@
       });
 
     svg.call(zoomHandler);
-
-    // Initial render
     gx.call(xAxis, x);
     dots.attr("cx", d => x(d.date));
   }
@@ -155,7 +158,6 @@
   });
 
   onDestroy(() => resizeObserver?.disconnect());
-
   $effect(() => { timelineData; color; accent; initTimeline(); });
 </script>
 
@@ -164,9 +166,7 @@
     <svg bind:this={svgElement}></svg>
     
     {#if activeDateStr}
-      <button class="reset-zoom-btn" onclick={handleReset} title="Reset">
-        ↺
-      </button>
+      <button class="reset-viz-btn" onclick={handleReset} title="Reset">↺</button>
     {/if}
   </div>
 
@@ -181,6 +181,7 @@
   .mirla-timeline-outer {
     width: 100%;
     margin: 2em 0;
+    font-family: var(--pico-font-family, inherit);
   }
 
   .timeline-visual-area {
@@ -198,29 +199,37 @@
 
   svg:active { cursor: grabbing; }
 
-  .reset-zoom-btn {
+  /* Match the barchart reset button styling and placement */
+  .reset-viz-btn {
     position: absolute;
     top: 0px;
-    left: 0px;
-    background: none;
-    border: none;
+    right: 0px;
+    background: var(--pico-card-background-color, rgba(255, 255, 255, 0.7));
+    border: 1px solid var(--pico-form-element-border-color, rgba(0,0,0,0.1));
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
-    font-size: 1.5rem;
-    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--pico-color, #555);
     z-index: 10;
   }
 
+  /* Typography and Theme Adapting */
   :global(mirla-timeline .axis path),
   :global(mirla-timeline .axis line) {
-    stroke: #ccc;
+    stroke: var(--pico-muted-color, #ccc);
     stroke-linecap: round;
   }
 
   :global(mirla-timeline .axis text) {
-    fill: currentColor;
-    font-size: 10px;
+    fill: var(--pico-color, currentColor); 
+    font-family: var(--pico-font-family, inherit);
     paint-order: stroke;
-    stroke: white;
+    stroke: var(--pico-background-color, white); /* Halo matching the page background */
     stroke-width: 4px;
     stroke-opacity: 0.6;
     stroke-linecap: round;

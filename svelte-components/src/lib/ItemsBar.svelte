@@ -1,13 +1,18 @@
 <script>
   import { fade } from 'svelte/transition';
   let { items = [], siteDomain = "", onclose } = $props();
+
+  // Pull translations from the global context with a safe fallback
+  const i18n = window.MIRLA_CONTEXT?.i18n || {
+    resultsFound: "results found"
+  };
 </script>
 
 {#if items.length > 0}
   <div class="mirla-items-bar" transition:fade={{ duration: 300 }}>
     <div class="items-bar-header">
-      <span>(<strong>{items.length}</strong>):</span>
-      <button onclick={onclose}>×</button>
+      <span><strong>{items.length}</strong> {i18n.resultsFound}</span>
+      <button onclick={onclose} aria-label="Close items bar">×</button>
     </div>
     <div class="items-grid">
       {#each items as item}
@@ -25,14 +30,14 @@
 
 <style>
   .mirla-items-bar {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border: 1px solid var(--pico-form-element-border-color, rgba(0, 0, 0, 0.1));
+    border-radius: var(--pico-border-radius, 8px);
     padding: 1rem;
     margin-top: 1rem;
-    max-height: 300px;
+    max-height: 240px;
     overflow-y: auto;
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(4px);
+    background: var(--pico-card-background-color, #ffffff);
+    box-shadow: var(--pico-card-box-shadow, 0 2px 4px rgba(0,0,0,0.05));
   }
 
   .items-bar-header {
@@ -40,7 +45,7 @@
     justify-content: space-between;
     margin-bottom: 0.8rem;
     font-size: 0.85rem;
-    color: #666;
+    color: var(--pico-muted-color, #666);
   }
 
   .items-bar-header button {
@@ -48,8 +53,13 @@
     background: none;
     font-size: 1.2rem;
     cursor: pointer;
-    color: #999;
+    color: var(--pico-color, #999);
     line-height: 1;
+    padding: 0 0.5rem;
+  }
+
+  .items-bar-header button:hover {
+    color: var(--pico-primary-hover, #000);
   }
 
   .items-grid {
@@ -60,9 +70,9 @@
 
   .item-thumb {
     aspect-ratio: 1;
-    border-radius: 4px;
+    border-radius: var(--pico-border-radius, 4px);
     overflow: hidden;
-    background: #eee;
+    background: var(--pico-muted-border-color, #eee);
     display: block;
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
@@ -70,7 +80,7 @@
   .item-thumb:hover {
     transform: scale(1.1);
     z-index: 10;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   }
 
   .item-thumb img {

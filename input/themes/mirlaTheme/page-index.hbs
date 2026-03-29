@@ -1,4 +1,4 @@
-{{! page-collection.hbs - Microfrontend injection template for the index }}
+{{! page-index.hbs - Microfrontend injection template for the index }}
 {{> head}}
 {{> navbar}}
 
@@ -15,7 +15,13 @@
     <script>
       window.MIRLA_CONTEXT = {
         siteDomain: "{{@website.baseUrl}}",
-        mediaUrl: "{{@website.mediaFilesUrl}}"
+        mediaUrl: "{{@website.mediaFilesUrl}}",
+        i18n: {
+          searchPlaceholder: "{{translate 'mirla.searchPlaceholder' fallback='Search...'}}",
+          resultsFound: "{{translate 'mirla.resultsFound' fallback='results found'}}",
+          loading: "{{translate 'mirla.loading' fallback='Loading...'}}",
+          all: "{{translate 'mirla.all' fallback='All'}}"
+        }
       };
     </script>
 

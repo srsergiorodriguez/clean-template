@@ -42,7 +42,18 @@
     {{!-- 1. Pass the dynamic domain context --}}
     <script>
       window.MIRLA_CONTEXT = {
-        siteDomain: "{{@website.baseUrl}}"
+        siteDomain: "{{@website.baseUrl}}",
+        mediaUrl: "{{@website.mediaFilesUrl}}",
+        i18n: {
+          searchPlaceholder: "{{translate 'mirla.searchPlaceholder' fallback='Search...'}}",
+          resultsFound: "{{translate 'mirla.resultsFound' fallback='results found'}}",
+          loading: "{{translate 'mirla.loading' fallback='Loading...'}}",
+          all: "{{translate 'mirla.all' fallback='All'}}",
+          downloadCSV: "{{translate 'mirla.downloadCSV' fallback='Download CSV'}}",
+          clearSearch: "{{translate 'mirla.clearSearch' fallback='Clear search'}}",
+          noRecordsFound: "{{translate 'mirla.noRecordsFound' fallback='No records found.'}}",
+          collectionMetadata: "{{translate 'mirla.collectionMetadata' fallback='Collection Metadata'}}",
+        }
       };
     </script>
 
