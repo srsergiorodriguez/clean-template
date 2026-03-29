@@ -169,10 +169,6 @@
     font-family: var(--pico-font-family, inherit);
     color: var(--pico-color, inherit);
     
-    /* FOOLPROOF BORDER COLOR:
-      Takes the current text color and makes it 20% opaque.
-      Always visible, always contrasts correctly with the background!
-    */
     --mirla-border: color-mix(in srgb, var(--pico-color, currentColor) 20%, transparent);
   }
 
@@ -356,10 +352,6 @@
 
   .mirla-table tr:last-child td {
     border-bottom: none;
-  }
-
-  .mirla-table tr:hover td {
-    background: var(--pico-card-sectioning-background-color, rgba(0,0,0,0.02));
   }
 
   .mirla-empty {

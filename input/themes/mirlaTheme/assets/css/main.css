@@ -65,6 +65,8 @@
   /* --- PUBLII THEME VARIABLES just for reference, is set in the theme's config --- */
   /* --main-width: 1100px;
   --sidebar-width: 300px; */
+  
+  --mirla-border: color-mix(in srgb, var(--pico-color) 20%, transparent);
 }
 
 /* Shoelace's style cohesion */
@@ -380,6 +382,44 @@ hr {
 
 .gallery__item:hover img {
   transform: scale(1.02);
+}
+
+#page-entry table {
+  display: table !important; 
+  width: 100% !important;
+  
+  /* OVERRIDE PUBLII'S INLINE STYLES */
+  border-collapse: separate !important; 
+  border-spacing: 0 !important;
+  
+  /* Apply the borders and radius directly to the table */
+  border: 1px solid var(--mirla-border) !important;
+  border-radius: var(--pico-border-radius, 8px) !important;
+  
+  /* Strictly matching the Mirla Table background */
+  background: var(--pico-card-background-color, transparent) !important;
+  margin: 2em 0;
+}
+
+#page-entry th,
+#page-entry td {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-bottom: 1px solid var(--mirla-border);
+  text-align: left;
+  vertical-align: top;
+  background-color: var(--pico-card-background-color, transparent) !important;
+}
+
+#page-entry tr:first-child td {
+  border-top-left-radius: var(--pico-border-radius, 8px);
+  border-top-right-radius: var(--pico-border-radius, 8px);
+}
+
+#page-entry tbody tr:last-child td {
+  border-bottom: none;
+  border-bottom-left-radius: var(--pico-border-radius, 8px);
+  border-bottom-right-radius: var(--pico-border-radius, 8px);
 }
 
 /* Support for wide galleries inside the main column */
