@@ -4,6 +4,8 @@ Mirla is an environment designed to transform static websites (built with Publii
 
 Follow this guide to install the theme, structure your collection data, configure the plugin, and use Mirla's custom interactive components in your articles.
 
+![Mirla Logo](mirlaLogo.png)
+
 ---
 
 ## 1. Install the Theme

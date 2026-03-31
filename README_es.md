@@ -4,6 +4,8 @@ Mirla es un entorno diseñado para transformar sitios web estáticos (creados co
 
 Sigue esta guía para instalar el tema, estructurar los datos de tu colección, configurar el *plugin* y usar los componentes interactivos personalizados de Mirla en tus posts.
 
+![Mirla Logo](mirlaLogo.png)
+
 ---
 
 ## 1. Instalar el Tema
